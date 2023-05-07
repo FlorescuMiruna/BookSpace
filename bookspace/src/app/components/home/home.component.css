@@ -1,14 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
-.container {
-    margin-top: 1%;
-}
-
 * {
-    /* margin: 0; */
-    /* padding: 0; */
-    /* color: #f2f2f2; */
     box-sizing: border-box;
-    /* font-family: 'Montserrat', sans-serif; */
+    font-family: 'Montserrat', sans-serif;
 }
 
 nav {
@@ -34,6 +27,8 @@ nav ul li.logo {
     font-size: 30px;
     font-weight: 700;
     color: #f2f2f2;
+    float: left;
+    /* border: solid red; */
 }
 
 nav ul li.logo-img img {
@@ -59,7 +54,7 @@ nav ul div.items a {
 }
 
 nav ul div.items a:hover {
-    color: cyan;
+    color: rgb(75, 125, 125);
 }
 
 nav ul .search-icon {
@@ -181,26 +176,102 @@ nav ul li.btn span.show:before {
 }
 
 
-/**buton */
-
-#label-special {
-    cursor: pointer;
-    background-color: rgb(20, 17, 17);
-    /* Green */
-    border: none;
-    color: white;
-    padding: 10px 10px;
+/* .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    /* Style as you please, it will become the visible UI component. */
+    width: 100%;
+    padding: 0 40px;
+    z-index: -2;
 }
 
-#profile-image-input {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
+.content .text {
+    font-size: 40px;
+    font-weight: 800;
+    padding: 5px 0;
+    color: #202020;
+}
+
+.content .p {
+    font-size: 28px;
+    font-weight: 600;
+    color: #202020;
+} */
+
+.container {
+    margin-top: 1%;
+}
+
+.inner-search {
+    overflow: hidden;
+}
+
+.inner-search img {
+    max-width: 100px;
+    max-height: 150px;
+}
+
+#row-md-4-search {
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#card-search:hover {
+    background-color: rgba(40, 149, 151, 0.416);
+}
+
+.card:hover {
+    background-color: rgba(40, 149, 151, 0.416);
+}
+
+#card-search ::shadow {
+    width: 40rem;
+    flex-direction: row;
+    margin-left: 20%;
+}
+
+
+/** de aici pt a 2 -a*/
+
+.inner {
+    overflow: hidden;
+}
+
+.inner img {
+    transition: 1.50s ease;
+}
+
+.inner:hover img {
+    transform: scale(1.5);
+}
+
+.col-md-2 {
+    /* border: 10px solid rgb(11, 175, 110); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-body {
+    text-align: center;
+}
+
+
+/* #card-popular {
+    width: 22rem;
+    height: 40rem;
+    margin-top: 5%;
+    margin-bottom: 5%;
+} */
+
+#card-popular {
+    width: 22rem;
+    height: 32rem;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 
@@ -231,8 +302,4 @@ nav ul li.btn span.show:before {
     font-weight: bold;
     /* border: solid red; */
     /* border: solid red; */
-}
-
-.btn.btn-danger {
-    margin-left: 10px;
 }
