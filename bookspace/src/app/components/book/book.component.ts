@@ -31,4 +31,6 @@ export class BookComponent {
     this.isRead =  !this.isRead;
   }
 
+
+
 }
