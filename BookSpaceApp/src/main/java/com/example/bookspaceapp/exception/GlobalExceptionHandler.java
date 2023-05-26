@@ -39,4 +39,13 @@ public class GlobalExceptionHandler {
         responseParameters.put("DateTime: ", LocalDateTime.now().toString());
         return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(responseParameters);
     }
+
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    @ExceptionHandler(CannotSavePhotoException.class)
+    public ResponseEntity<?> handlerCannotSavePhotoException(Exception e){
+        Map<String, String> responseParameters = new HashMap<>();
+        responseParameters.put("Reason: ", e.getMessage());
+        responseParameters.put("DateTime: ", LocalDateTime.now().toString());
+        return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body(responseParameters);
+    }
 }

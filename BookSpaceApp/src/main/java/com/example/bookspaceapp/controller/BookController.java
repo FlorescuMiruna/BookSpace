@@ -4,6 +4,7 @@ import com.example.bookspaceapp.model.Book;
 import com.example.bookspaceapp.service.BookService;
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
@@ -27,6 +28,11 @@ public class BookController {
     @PostMapping
     public Book addBook(@RequestBody @Valid Book book){
         return bookService.save(book);
+    }
+
+    @PostMapping("/{bookId}/cover")
+    public Book uploadCoverToBook(@PathVariable Long bookId, @RequestBody MultipartFile cover){
+        return bookService.uploadCoverToBook(bookId, cover);
     }
 
     @GetMapping

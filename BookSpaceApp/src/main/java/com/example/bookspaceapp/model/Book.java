@@ -48,10 +48,14 @@ public class Book {
     private LocalDate date;
 
     @Lob
-    @Column( name = "description")
+    @Column(name = "description")
     @NotNull(message = "Book description can't be null!")
     @NotEmpty(message = "Book description can't be empty!")
     private String description;
+
+    @Lob
+    @Column(name = "cover", columnDefinition="BLOB")
+    private byte[] cover;
 
     /** ONE TO MANY relation with User_Book **/
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
@@ -65,4 +69,14 @@ public class Book {
     @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
+    public Book(Long id, String title, String author, String genre, LocalDate date, String description, List<UserBook> userBooks, List<Review> reviews) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.date = date;
+        this.description = description;
+        this.userBooks = userBooks;
+        this.reviews = reviews;
+    }
 }

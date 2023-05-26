@@ -3,13 +3,16 @@ package com.example.bookspaceapp.controller;
 import com.example.bookspaceapp.exception.AlreadyExistingException;
 import com.example.bookspaceapp.model.User;
 import com.example.bookspaceapp.service.security.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 ;
 
 @RestController
-//@RequestMapping("/user")
 @Slf4j
 public class UserController {
     UserService userService;
@@ -18,30 +21,22 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping("/login")
-//    public String showLogInForm(){ return "login"; }
-//    @PostMapping("/login")
-//    public ResponseEntity<User> login(@RequestBody User user) {
-//        authenticate(user.getUsername(), user.getPassword());
-//        User loginUser = userService.findUserByUsername(user.getUsername());
-//        UserPrincipal userPrincipal = new UserPrincipal(loginUser);
-//        HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
-//        return new ResponseEntity<>(loginUser, jwtHeader, OK);
-//    }
+    @GetMapping("/login")
+    public String showLogInForm(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        log.info(String.valueOf(auth));
+        if (auth.isAuthenticated())
+            return "home";
+        return "login";
+    }
 
 //    @GetMapping("/access-denied")
 //    public String accessDeniedPage(){ return "access-denied"; }
 //
-//    @RequestMapping({"","/","/home"})
-//    public ModelAndView getHome(){
-//        return new ModelAndView("home");
-//    }
-//
-//    @GetMapping("/register")
-//    public String showRegisterForm(Model model){
-//        model.addAttribute("user", new User());
-//        return "register";
-//    }
+    @GetMapping({"","/","/home"})
+    public String getHome(){
+        return "Welcome to BookSpace App!";
+    }
 
     @PostMapping("/register")
     public String register(@RequestBody @Valid User user){
@@ -53,5 +48,11 @@ public class UserController {
         }
 
     }
+
+//    @PostMapping("/perform_login")
+//    public String performLogin(Authentication authentication) {
+//        return "redirect:/home";
+//    }
+
 
 }
