@@ -2,19 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Book } from '../model/book';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
+
+
   private host = environment.apiUrl;
-  getMovieURL = `${this.host}/book/test`;
+  getBooksURL : string;
 
-  constructor(private http: HttpClient) {}
 
-  getAllMovies(): Observable<String> {
-  
-    return this.http.get<String>(this.getMovieURL);
+  constructor(private http: HttpClient) {
+    this.getBooksURL = `${this.host}/book`;
+  }
+
+
+  getAllBooks(): Observable<Book[]> {
+    console.log(this.getBooksURL)
+    return this.http.get<Book[]>(this.getBooksURL);
   }
 }
