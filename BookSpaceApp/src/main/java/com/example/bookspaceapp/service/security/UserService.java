@@ -37,6 +37,8 @@ public class UserService{
         }
         else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//            user.setFirstName(user.getFirstName());
+//            user.setLastName(user.getLastName());
             Set<Authority> authoritySet = new HashSet<>();
             Authority userRole = authorityRepository.save(Authority.builder().role("ROLE_USER").build());
             authoritySet.add(userRole);

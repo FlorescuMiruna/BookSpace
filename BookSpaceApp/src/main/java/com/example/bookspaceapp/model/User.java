@@ -18,6 +18,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Builder
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 ;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @Slf4j
 public class UserController {
@@ -39,13 +39,10 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody @Valid User user){
-        try {
+    public User register(@RequestBody @Valid User user){
+
             userService.save(user);
-            return "New User registered!";
-        } catch (AlreadyExistingException e){
-            return "User already existing!";
-        }
+            return user;
 
     }
 

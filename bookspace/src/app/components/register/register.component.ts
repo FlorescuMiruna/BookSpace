@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   public onRegister(user: User): void {
+    console.log('testt on register');
     this.showLoading = true;
 
    /** 
@@ -49,11 +50,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
     else{
       this.subscriptions.push(
         this.authenticationService.register(user).subscribe(
+      
           (response: User) => {
+            console.log('response', response);
             this.showLoading = false;
-            // this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.firstName}.`);
+       
+              Swal.fire({
+                icon: 'success',
+                title: `A new account was created for ${response.username}.`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+            // this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.username}.`);
           },
           (errorResponse: HttpErrorResponse) => {
+            console.log('error',errorResponse);
             // this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
             this.showLoading = false;
           }
