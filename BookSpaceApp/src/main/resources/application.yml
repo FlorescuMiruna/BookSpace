@@ -2,7 +2,10 @@
 
 jwt:
   secret: '[a-zA-Z0-9._]^+$Guidelines89797987forAlphabeticalArraNumeralsandOtherSymbo$'
+  expiration: 3600
 
+#security:
+#  enable-csrf: false
 
 server:
   port: 8000

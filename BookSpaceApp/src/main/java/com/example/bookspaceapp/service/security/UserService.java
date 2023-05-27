@@ -33,7 +33,7 @@ public class UserService{
         String username = user.getUsername();
         Optional<User> userOptional = userRepository.findByUsername(username);
         if(userOptional.isPresent()) {
-            throw new AlreadyExistingException("User with username: " +  username + "not found");
+            throw new AlreadyExistingException("User with username: " +  username + "already exists!");
         }
         else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
