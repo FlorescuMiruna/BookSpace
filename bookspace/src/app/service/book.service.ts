@@ -9,19 +9,22 @@ import { Book } from '../model/book';
 })
 export class BookService {
 
-
-
   private host = environment.apiUrl;
   getBooksURL : string;
-
+  getBookByIdURL : string;
 
   constructor(private http: HttpClient) {
     this.getBooksURL = `${this.host}/book`;
+    this.getBookByIdURL = `${this.host}/book`;
   }
-
 
   getAllBooks(): Observable<Book[]> {
     console.log(this.getBooksURL)
     return this.http.get<Book[]>(this.getBooksURL);
+  }
+
+  getBookById(id: string): Observable<Book> {
+    console.log(this.getBookByIdURL + '/' + id)
+    return this.http.get<Book>(this.getBookByIdURL + '/' + id);
   }
 }

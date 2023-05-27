@@ -19,12 +19,11 @@ export class HomeComponent implements OnInit {
     this.getAllBooks();
   }
 
-  goToBook() {
-
+  goToBook(book: Book) {
 
     this.router.navigate(['/book'])
-
-
+    localStorage.setItem('bookId', book.id.toString());
+    console.log('testt', localStorage.getItem('bookId'))
 
   }
 

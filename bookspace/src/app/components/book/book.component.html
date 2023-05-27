@@ -47,21 +47,20 @@
 
             <div class="col-sm-4">
                 <div>
-                    <h1>Dune</h1>
+                    <h1>{{book.title}}</h1>
 
 
                 </div>
 
-                <h2>Science Fiction</h2>
+                <h2>{{book.genre}}</h2>
 
                 <div class="box" id="plot-box">
-                    Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides, heir to a noble family tasked with ruling an inhospitable world where the only thing of value is the "spice" melange, a drug capable of extending life and enhancing consciousness.
-                    Coveted across the known universe, melange is a prize worth killing for...
+                    {{book.description}}
                 </div>
                 <h2>FRANK HERBERT</h2>
                 <div class="box">
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-calendar"></i>2019</li>
+                        <li><i class="fa fa-calendar"></i>{{book.date}}</li>
                         <li *ngIf="averageRating !== 0"><i class="fa fa-star"></i>Avrage Rating:<b style="color:Tomato;font-size: 20px;">  5.76</b></li>
                         <li *ngIf="averageRating===0 "><i class="fa fa-star "></i>Avrage Rating: 4.7</li>
                         <!-- <li *ngIf="averageRating !==0 "> Avrage Rating: {{averageRating}} <i class="fa fa-star " aria-hidden="true "></i> </li>
