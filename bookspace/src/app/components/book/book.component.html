@@ -254,3 +254,33 @@
     </div>
 
 </section>
+
+<!-- Edit Comm Modal -->
+<div class="modal fade" id="editComm" tabindex="-1 " aria-labelledby="exampleModalLabel ">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title " id="exampleModalLabel">Edit your review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close "></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="commDetailsEdit ">
+                    <div class="mb-3 ">
+                        <label for="exampleInputEmail2 " class="form-label ">Text</label>
+                        <!-- <input type="text" formControlName="textt" class="form-control " id="textt" aria-describedby="emailHelp "> -->
+                        <textarea type="text" formControlName="textt" class="form-control " id="textt" aria-describedby="emailHelp "></textarea>
+                    </div>
+
+
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateComm()">Update review</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

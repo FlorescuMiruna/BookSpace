@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllBooks(){
+    console.log('testt getAllBooks')
     this.bookService.getAllBooks().subscribe(res => {
 
       this.books = res;

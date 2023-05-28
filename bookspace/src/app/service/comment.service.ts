@@ -47,8 +47,9 @@ export class CommentService {
 
   
 
-  updateComm(comm : Review): Observable<Review>{
-    return this.http.put<Review>(this.updateCommURL + comm.id, comm);
+  updateComm(comm : Review, bookId : string, userId: number): Observable<Review>{
+    var URL = this.getAllCommentsByBookIdURL + bookId + '/user/' + userId + '/review';
+    return this.http.put<Review>(URL, comm);
 
   }
 }

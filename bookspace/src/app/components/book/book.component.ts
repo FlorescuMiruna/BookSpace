@@ -278,10 +278,35 @@ export class BookComponent {
 
 
 }
+editComm(comm: Review) {
+ 
+  this.commDetailsEdit.controls['id'].setValue(comm.id);
+   this.commDetailsEdit.controls['textt'].setValue(comm.review);
 
-  editComm(comm: Review){
 
-  }
+ }
+updateComm() {
+   
+  
+  this.myCommObjEdit.id = this.commDetailsEdit.value.id;
+ this.myCommObjEdit.review = this.commDetailsEdit.value.textt;
+
+ var userId = this.authenticationService.getUserFromLocalCache().id;
+  this.commentService.updateComm(this.myCommObjEdit, this.book.id.toString(), userId).subscribe(res=>{
+    console.log("res",res);
+
+    this.commDetailsEdit = this.formBuilder.group({
+      id : [''],
+      textt : ['']
+
+
+    });  
+   
+    this.initializeComments();
+  },err=>{
+    console.log(err);
+  })
+}
 
   initializeComments() {
     console.log('initializeComments this.book', this.book);
