@@ -48,7 +48,7 @@ public class Book {
     private LocalDate date;
 
     @Lob
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     @NotNull(message = "Book description can't be null!")
     @NotEmpty(message = "Book description can't be empty!")
     private String description;
