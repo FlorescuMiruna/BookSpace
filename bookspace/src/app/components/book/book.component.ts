@@ -68,9 +68,9 @@ export class BookComponent {
     this.isInTBR = !this.isInTBR;
 
   }
-  addBook() {
-    this.isRead =  !this.isRead;
-  }
+  // addBook() {
+  //   this.isRead =  !this.isRead;
+  // }
 
   initializeBook(){
     console.log('initializeBook');
@@ -183,6 +183,76 @@ export class BookComponent {
 
   }
 
+  addBook() {
+    if (!this.isRead) {
+      var id = this.authenticationService.getUserFromLocalCache().id;
+      this.bookService.addBook(this.book, id).subscribe(res => {
+
+        // console.log("Filmul a fost adaugat cu sucess:", res);
+
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'The book was added to your list',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+        // this.refreshUserFromLocalChash(this.authenticationService.getUserFromLocalCache().id);
+        this.isRead = true;
+        console.log("ESTE VAZUT FILMUL?", this.isRead);
+
+      }, err => {
+        console.log(err);
+
+      });
+
+    }
+    else {
+      Swal.fire({
+        title: 'Do you want to remove the movie from your list?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#4E9A9B',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+
+          let userId = this.authenticationService.getUserFromLocalCache().id;
+
+          this.bookService.removeBook(this.book.id, userId).subscribe(res => {
+
+
+            Swal.fire(
+              'The movie was removed!',
+            )
+            this.isRead = false;
+
+            //Atunci cand sterg filmul din lista il sterg si din lista favoritelor
+  
+   
+
+
+            // this.refreshUserFromLocalChash(userId);
+
+
+
+
+
+          }, err => {
+            console.log(err)
+            console.log("Error while fetching data")
+          });
+
+          // this.refreshUserFromLocalChash(userId);
+
+
+        }
+      })
+    }
+  }
 
   addComm() {
     console.log('addComm');

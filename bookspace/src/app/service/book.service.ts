@@ -57,9 +57,39 @@ export class BookService {
     );
   }
 
+  addBook(book: Book, userId: number): Observable<any> {
+    const URL = this.addBookToTBRURL + '/' + book.id + '/user/' + userId + '/read';
+    return this.http.post(URL, null, { responseType: 'text' }).pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      }),
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
+  }
+
+
 
   removeBookFromTBR(bookId: number, userId: number):  Observable<any>{
     const URL = this.addBookToTBRURL + '/' + bookId+ '/user/' + userId + '/toRead';
+    return this.http.delete(URL, { responseType: 'text' }).pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      }),
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
+
+  }
+
+  removeBook(bookId: number, userId: number):  Observable<any>{
+    const URL = this.addBookToTBRURL + '/' + bookId+ '/user/' + userId + '/read';
     return this.http.delete(URL, { responseType: 'text' }).pipe(
       map(response => {
         console.log(response);
