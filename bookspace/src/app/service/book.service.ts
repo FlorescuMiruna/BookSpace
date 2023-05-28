@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Book } from '../model/book';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -35,18 +36,40 @@ export class BookService {
   }
 
 
-  addBookToTBR(book: Book,userId: number): Observable<any> {
-    var URL = "";
-    URL = this.addBookToTBRURL + '/' + book.id + '/user/' + userId + '/toRead';
-    console.log('URL', URL);
-    return this.http.post(URL, null);
+  // addBookToTBR(book: Book,userId: number): Observable<any> {
+  //   var URL = "";
+  //   URL = this.addBookToTBRURL + '/' + book.id + '/user/' + userId + '/toRead';
+  //   console.log('URL', URL);
+  //   return this.http.post(URL, null);
+  // }
+
+  addBookToTBR(book: Book, userId: number): Observable<any> {
+    const URL = this.addBookToTBRURL + '/' + book.id + '/user/' + userId + '/toRead';
+    return this.http.post(URL, null, { responseType: 'text' }).pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      }),
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
   }
 
-  removeBookFromTBR(bookId: number, userId: string):  Observable<any>{
-    var URL = "";
-    URL = this.removeBookFromTBRURL +'/' + bookId + '/user/' + userId + '/toRead';
-    console.log('URL', URL);
-    return this.http.delete<any>(URL);
+
+  removeBookFromTBR(bookId: number, userId: number):  Observable<any>{
+    const URL = this.addBookToTBRURL + '/' + bookId+ '/user/' + userId + '/toRead';
+    return this.http.delete(URL, { responseType: 'text' }).pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      }),
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
 
   }
 }

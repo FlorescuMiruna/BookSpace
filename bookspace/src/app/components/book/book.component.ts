@@ -159,29 +159,20 @@ export class BookComponent {
       }).then((result) => {
         if (result.isConfirmed) {
 
-           this.http.delete('http://localhost:8000/book/1/user/4/toRead').subscribe(
-            () => {
-              console.log('Delete request successful');
-              return { status: 200, message: 'Delete request successful' };
-            },
-            (            error: any) => {
-              console.log('Error occurred:', error);
-            }
-          );
-          // let userId = this.authenticationService.getUserFromLocalCache().id;
-          // var userId = "4";
-          // this.bookService.removeBookFromTBR(this.book.id, userId).subscribe(res => {
+          let userId = this.authenticationService.getUserFromLocalCache().id;
+    
+          this.bookService.removeBookFromTBR(this.book.id, userId).subscribe(res => {
 
-          //   console.log(res);
-          //   Swal.fire(
-          //     'The book was removed!',
-          //   )
-          //   this.isInTBR = false;
+            console.log(res);
+            Swal.fire(
+              'The book was removed!',
+            )
+            this.isInTBR = false;
 
-          // }, err => {
-          //   console.log(err)
-          //   console.log("Error while fetching data")
-          // });
+          }, err => {
+            console.log(err)
+            console.log("Error while fetching data")
+          });
 
 
           // this.refreshUserFromLocalChash(userId);
@@ -191,6 +182,7 @@ export class BookComponent {
     }
 
   }
+
 
   addComm() {
     console.log('addComm');
