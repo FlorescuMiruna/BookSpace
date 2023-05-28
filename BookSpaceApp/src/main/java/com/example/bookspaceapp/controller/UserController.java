@@ -4,6 +4,7 @@ import com.example.bookspaceapp.configuration.JwtTokenProvider;
 import com.example.bookspaceapp.exception.AlreadyExistingException;
 import com.example.bookspaceapp.model.JwtAuthenticationResponse;
 import com.example.bookspaceapp.model.User;
+import com.example.bookspaceapp.model.UserWithToken;
 import com.example.bookspaceapp.service.security.JpaUserDetailsService;
 import com.example.bookspaceapp.service.security.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -67,24 +68,53 @@ public class UserController {
 //    @GetMapping("/login")
 //    public String showLogInForm(){ return "login"; }
 
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody User user) {
+//        try {
+//            // Authenticate the user
+//            authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
+//            );
+//
+//            // Generate JWT token
+//            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+//            String token = jwtTokenProvider.generateToken(userDetails);
+//
+//            // Return the token in the response
+//            return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+//        } catch (AuthenticationException e) {
+//            // Return error response if authentication fails
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+//        }
+//    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
-        try {
-            // Authenticate the user
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
-            );
+
+//        new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
 
             // Generate JWT token
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             String token = jwtTokenProvider.generateToken(userDetails);
 
             // Return the token in the response
-            return ResponseEntity.ok(new JwtAuthenticationResponse(token));
-        } catch (AuthenticationException e) {
-            // Return error response if authentication fails
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-        }
+            return ResponseEntity.ok(new UserWithToken(user, new JwtAuthenticationResponse(token)));
+//        try {
+//            // Authenticate the user
+//            authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
+//            );
+//
+//            // Generate JWT token
+//            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+//            String token = jwtTokenProvider.generateToken(userDetails);
+//
+//            // Return the token in the response
+//            return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+//        } catch (AuthenticationException e) {
+//            // Return error response if authentication fails
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+//        }
     }
 
 //    @PostMapping("/perform_login")

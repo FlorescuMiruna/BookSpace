@@ -1,5 +1,6 @@
 package com.example.bookspaceapp.configuration;
 
+import com.example.bookspaceapp.bootstrap.FixedCredentialsAuthenticationProvider;
 import com.example.bookspaceapp.filter.CsrfLoggerFilter;
 import com.example.bookspaceapp.service.security.JpaUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,11 +28,25 @@ public class SecurityJdbcConfig extends WebSecurityConfigurerAdapter {
 //    @Value("${security.enable-csrf}")
 //    private boolean csrfEnabled;
 
-    private final JpaUserDetailsService userDetailsService;
+//    private final JpaUserDetailsService userDetailsService;
 
-    public SecurityJdbcConfig(JpaUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    private final FixedCredentialsAuthenticationProvider authenticationProvider;
+
+
+//    public SecurityJdbcConfig(JpaUserDetailsService userDetailsService, FixedCredentialsAuthenticationProvider authenticationProvider) {
+//        this.userDetailsService = userDetailsService;
+//        this.authenticationProvider = authenticationProvider;
+//    }
+
+    public SecurityJdbcConfig(FixedCredentialsAuthenticationProvider authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
     }
+
+//    public SecurityJdbcConfig(boolean disableDefaults, JpaUserDetailsService userDetailsService, FixedCredentialsAuthenticationProvider authenticationProvider) {
+//        super(disableDefaults);
+//        this.userDetailsService = userDetailsService;
+//        this.authenticationProvider = authenticationProvider;
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -46,34 +61,29 @@ public class SecurityJdbcConfig extends WebSecurityConfigurerAdapter {
 
 
 
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.authenticationProvider(authenticationProvider);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-//                .csrf().disable().cors().and()
+                .csrf().disable().cors().and()
                 .authorizeRequests()
                 .antMatchers("/register", "/login", "/home").permitAll()
                 .antMatchers("/home").hasAnyRole("ADMIN", "USER")
-//                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home").permitAll()
                 .and()
                 .logout().permitAll()
                 .and()
-//                .csrf().disable()
+                .csrf().disable()
         ;
 
-//        if(!csrfEnabled)
-//        {
-//            http.csrf().disable();
-//        }
 
-        http.addFilterAfter(new CsrfLoggerFilter(), CsrfFilter.class);
     }
 }
