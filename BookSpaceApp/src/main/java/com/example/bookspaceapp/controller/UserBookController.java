@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserBookController {
 
     UserBookService userBookService;
@@ -22,9 +23,10 @@ public class UserBookController {
     }
 
     @PostMapping("/book/{bookId}/user/{userId}/read")
-    public String addBookToUserReadList(@PathVariable Long bookId, @PathVariable Long userId){
-        userBookService.addBookToUserAlreadyRead(bookId, userId);
-        return "Book " + bookId + " was added to user's " + userId + " read list!";
+    public Book addBookToUserReadList(@PathVariable Long bookId, @PathVariable Long userId){
+         return userBookService.addBookToUserAlreadyRead(bookId, userId);
+
+//        return "Book " + bookId + " was added to user's " + userId + " read list!";
     }
 
     @DeleteMapping("/book/{bookId}/user/{userId}/toRead")

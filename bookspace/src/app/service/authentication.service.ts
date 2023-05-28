@@ -16,9 +16,9 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  public login(user: User): Observable<HttpResponse<User>> {
-    return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
-  }
+  // public login(user: User): Observable<HttpResponse<User>> {
+  //   return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
+  // }
 
   public register(user: User): Observable<User> {
     return this.http.post<User>(`${this.host}/register`, user);
@@ -69,6 +69,30 @@ export class AuthenticationService {
     //   this.logOut();
     //   return false;
     // }
+  }
+
+  // public login(username: string, password: string): Observable<HttpResponse<User>>  {
+
+  //   return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
+
+  //   const credentials = { username, password };
+  //   this.http.post('/login', credentials).subscribe(
+  //     (response) => {
+  //       // Handle successful login response
+  //     },
+  //     (error) => {
+  //       // Handle login error
+  //     }
+  //   );
+
+  //   }
+
+  // public login(user: User): Observable<HttpResponse<User>> {
+  //   return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
+  // }
+
+  public login(user: User): Observable<User> {
+    return this.http.post<User>(`${this.host}/login`, user);
   }
 
 }

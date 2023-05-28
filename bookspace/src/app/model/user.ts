@@ -16,6 +16,7 @@ export class User {
    public movies:[];
    public movies_watch_list:[];
    public favorites:[];
+   public password: string;
  
    constructor() {
       this.id = null as any;
@@ -35,6 +36,7 @@ export class User {
      this.movies = [];
      this.movies_watch_list = [];
      this.favorites = [];
+     this.password = '';
    }
  
  }

@@ -52,7 +52,7 @@ public class UserBookService {
 
     }
 
-    public void addBookToUserAlreadyRead(Long bookId, Long userId) {
+    public Book addBookToUserAlreadyRead(Long bookId, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("User with id " + userId + " was not found!"));
 
@@ -70,7 +70,9 @@ public class UserBookService {
             UserBook userBook = new UserBook('Y', 'N', 0, book, user);
             savedUserBook = userBookRepository.save(userBook);
         }
+
         log.info("Saved new book-user Read relation: {}", savedUserBook);
+        return book;
     }
 
     public void deleteBookFromUserToReadList(Long bookId, Long userId){
