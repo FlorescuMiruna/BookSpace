@@ -38,9 +38,10 @@ export class CommentService {
     return this.http.post<Review>(URL,comm);
   }
 
-  deleteComment(comm: Review,bookId : string, userId: number): Observable<Review> {
+  deleteComment(comm: Review,bookId : string, userId: number): Observable<String> {
     var URL = this.getAllCommentsByBookIdURL + bookId + '/user/' + userId + '/review';
-    return this.http.delete<Review>(URL);
+    // return this.http.delete<String>(URL);
+    return this.http.delete(URL, { responseType: 'text' });
   }
 
 

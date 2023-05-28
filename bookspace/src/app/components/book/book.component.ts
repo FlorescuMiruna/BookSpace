@@ -259,6 +259,9 @@ export class BookComponent {
       this.comments = res;
       console.log("comments",this.comments);
 
+      for (let comment of this.comments){
+        console.log(comment)
+      }
       /**Iau din lista doar comentariile carora le-am dat like*/
 
       // this.likedComms = this.comments.filter(val => val.likes.includes(this.user.id))
