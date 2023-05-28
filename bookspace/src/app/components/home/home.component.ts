@@ -50,5 +50,9 @@ export class HomeComponent implements OnInit {
   goToMyBooks(){
     this.router.navigate(['/my-books'])
   }
+  logOut(){
+    this.authenticationService.logOut();
+    this.router.navigate(['/login'])
+  }
 
 }

@@ -24,13 +24,7 @@ export class AuthenticationService {
     return this.http.post<User>(`${this.host}/register`, user);
   }
 
-  public logOut(): void {
-    this.token = null;
-    this.loggedInUsername = null;
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('users');
-  }
+
 
   public saveToken(token: string): void {
     this.token = token;
@@ -93,6 +87,13 @@ export class AuthenticationService {
 
   public login(user: User): Observable<User> {
     return this.http.post<User>(`${this.host}/login`, user);
+  }
+
+  public logOut(): void {
+
+    localStorage.removeItem('user');
+  
+ 
   }
 
 }

@@ -179,4 +179,10 @@ export class MyBooksComponent implements OnInit {
     this.checkPage();
 
   }
+  logOut(){
+    this.authenticationService.logOut();
+    this.router.navigate(['/login'])
+  }
+
+  
 }
