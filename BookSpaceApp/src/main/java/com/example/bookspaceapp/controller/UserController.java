@@ -97,8 +97,11 @@ public class UserController {
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             String token = jwtTokenProvider.generateToken(userDetails);
 
+            User userAuth = userService.getFullUserByUsername(user.getUsername());
+
             // Return the token in the response
-            return ResponseEntity.ok(new UserWithToken(user, new JwtAuthenticationResponse(token)));
+            return ResponseEntity.ok(new UserWithToken(userAuth.getId(), userAuth.getUsername(), userAuth.getPassword(),
+                    userAuth.getFirstName(), userAuth.getLastName(), userAuth.getEmail(), new JwtAuthenticationResponse(token)));
 //        try {
 //            // Authenticate the user
 //            authenticationManager.authenticate(

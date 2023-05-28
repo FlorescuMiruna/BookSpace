@@ -1,6 +1,7 @@
 package com.example.bookspaceapp.service.security;
 
 import com.example.bookspaceapp.exception.AlreadyExistingException;
+import com.example.bookspaceapp.exception.NotFoundException;
 import com.example.bookspaceapp.model.Authority;
 import com.example.bookspaceapp.model.User;
 import com.example.bookspaceapp.repository.security.AuthorityRepository;
@@ -47,5 +48,11 @@ public class UserService{
             return savedUser;
         }
 
+    }
+
+    public User getFullUserByUsername(String username){
+        User user =  userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("User with username " + username + " was not found!"));
+        return user;
     }
 }
