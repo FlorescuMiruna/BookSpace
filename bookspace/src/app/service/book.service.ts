@@ -30,6 +30,20 @@ export class BookService {
     return this.http.get<Book[]>(this.getBooksURL);
   }
 
+  getTBRBooks(userId: string): Observable<Book[]> {
+
+    const URL = this.getBooksURL + '/user/' + userId + '/toRead';
+    console.log(URL);
+    return this.http.get<Book[]>(URL);
+  }
+
+  getReadBooks(userId: string): Observable<Book[]> {
+    console.log('userId **', userId)
+    const URL = this.getBooksURL + '/user/' + userId + '/read';
+    console.log(URL);
+    return this.http.get<Book[]>(URL);
+  }
+
   getBookById(id: string): Observable<Book> {
     console.log('getBookById URL:', this.getBookByIdURL + '/' + id)
     return this.http.get<Book>(this.getBookByIdURL + '/' + id);

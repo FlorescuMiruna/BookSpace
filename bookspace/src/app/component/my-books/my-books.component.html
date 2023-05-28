@@ -1,0 +1,136 @@
+<nav>
+
+    <ul>
+        <li class="logo-img"> <img src="assets/book.png"></li>
+        <li class="logo">Book Space</li>
+
+
+        <li class="btn"><span class="fas fa-bars"></span></li>
+        <div class="items">
+            <!-- <li><a href="/home">Home</a></li> -->
+            <li><a href="/movie">Descover Books</a></li>
+            <div class="dropdown">
+                <li id="my-movies"><a>My Books</a></li>
+
+                <div class="dropdown-content">
+
+                    <p class="dropdown-item">Read </p>
+                    <p class="dropdown-item">To be read </p>
+                    <!-- <p class="dropdown-item">Favorites</p> -->
+                </div>
+
+
+            </div>
+
+            <li><a>Profile</a></li>
+            <li><a>Users</a></li>
+
+        </div>
+
+
+    </ul>
+</nav>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5" id="card-nr">
+            <!-- <div class="card m-b-30 " id="special-card ">
+                <div class="card-body ">
+                    <div class="media ">
+                        <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg " src="assets/watched.png " alt="Generic placeholder image " />
+                        <div class="media-body ">
+
+                            <h5 class="text-muted font-14 "> Watched movies</h5>
+                            <h1><b>{{movies.length}}</b> </h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="col-lg-5" id="card-timp">
+            <div class="card m-b-30 " id="special-card ">
+                <div class="card-body ">
+                    <div class="media ">
+                        <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg " src="assets/clock.png " alt="Generic placeholder image " />
+                        <div class="media-body ">
+
+                            <h5 class="text-muted font-14 ">Time spent watching movies</h5>
+                            <h2> {{time[0]}} Days {{time[1]}} Hours </h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+<!-- <h1>TIME SPENT WATCHING MOVIES: {{time[0]}} Days {{time[1]}} Hours </h1>
+<h1>MOVIES WATCHED: {{movies.length}}</h1> -->
+
+<div class="card bg-light mb-3" [hidden]="!pageWatched">
+    <div class="card-header">
+        <h4 class="font-weight-bold ">YOUR BOOKS</h4>
+    </div>
+</div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css " rel="stylesheet " integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN " crossorigin="anonymous ">
+<div class="row" [hidden]="!pageWatched">
+
+    <div class="col-md-3 " *ngFor="let movie of books " (click)="goToMovie(movie) ">
+
+        <div class="card shadow " id="card-movie ">
+            <div class="inner ">
+                <img src={{movie.cover}} class="card-img-top " alt="... ">
+
+            </div>
+            <div class="card-body ">
+                <h5 class="card-title ">{{movie.title}}</h5>
+                <p class="card-text ">{{movie.date}}</p>
+                <p class="card-text ">{{movie.author}}</p>
+
+                <!-- <i *ngIf="favorites_ids.includes(movie.id) " class="fa fa-heart " style="font-size:20px; "></i> -->
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+<div class="card bg-light mb-3" [hidden]="!pageWatchList">
+    <div class="card-header">
+        <h4 class="font-weight-bold">TO BE READ</h4>
+    </div>
+</div>
+<div class="row" [hidden]="!pageWatchList">
+
+    <div class="col-md-3 " *ngFor="let movie of movies_watch_list " (click)="goToMovie(movie) ">
+
+        <div class=" card shadow " id="card-movie ">
+            <div class="inner ">
+                <img src={{movie.cover}} class="card-img-top " alt="... ">
+
+            </div>
+            <div class="card-body ">
+                <h5 class="card-title ">{{movie.title}} </h5>
+                <p class="card-text ">{{movie.date}}</p>
+                <p class="card-text ">{{movie.author}}</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>

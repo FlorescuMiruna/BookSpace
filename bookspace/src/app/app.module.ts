@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { BookComponent } from './components/book/book.component';
+import { MyBooksComponent } from './component/my-books/my-books.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { BookComponent } from './components/book/book.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    BookComponent
+    BookComponent,
+    MyBooksComponent
   ],
   imports: [
     BrowserModule,
