@@ -83,43 +83,14 @@ export class BookComponent {
     this.bookService.getBookById(idBook).subscribe(res => {
       console.log('res', res);
       this.book = res;
-      console.log(this.book)
+      this.coverImageUrl = 'data:image/jpeg;base64,' + this.book.cover;
 
-      let poza :Uint8Array  = this.stringToByteArray(this.book.cover);
-      // this.coverImageUrl = this.getBase64Image(poza);
-      // console.log('testt  this.coverImageUrl',  this.coverImageUrl);
-      this.coverImageUrl = this.getBookCoverUrl(this.book.cover); // Convert byte array to URL
-
-      console.log('testt  this.coverImageUrl',  this.coverImageUrl);
       this.initializeComments();
 
     }, err => {
       console.log("Error while fetching data")
     });
   }
-
-  
-  getBookCoverUrl(cover: any): string {
-    // Convert the byte array to a data URI or base64-encoded string
-    // Example: Assuming the byte array is base64-encoded
-    const base64String = btoa(String.fromCharCode(...new Uint8Array(cover)));
-    return 'data:image/jpeg;base64,' + base64String;
-  }
-   stringToByteArray(input: string): Uint8Array {
-    const encoder = new TextEncoder();
-    return encoder.encode(input);
-  }
-
-  getBase64Image(byteArray: Uint8Array) {
-    const numberArray = Array.from(byteArray);
-    const base64String = btoa(String.fromCharCode.apply(null, numberArray));
-    return `data:image/png;base64,${base64String}`;
-  }
-  // addBookToTBR(book: Book){
-  //   this.bookService.getAllBooks();
-  // }
-
-  
 
   addBookToTBR() {
 

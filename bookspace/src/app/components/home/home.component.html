@@ -98,7 +98,8 @@
 
             <div class="card shadow" id="card-popular">
                 <div class="inner">
-                    <img src="assets/dune.png" class="card-img-top " alt="... ">
+                    <img *ngIf="book.cover" [src]="book.cover" class="card-img-top " alt="Book Cover">
+                    <img *ngIf="!book.cover" src="assets/dune.png" class="card-img-top " alt="Default Cover">
                 </div>
                 <div class="card-body ">
                     <h5 class="card-title ">{{book.title}}</h5>

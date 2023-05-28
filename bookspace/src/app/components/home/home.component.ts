@@ -33,6 +33,12 @@ export class HomeComponent implements OnInit {
 
       this.books = res;
       // this.mostPopularMovies = this.mostPopularMovies.slice(0,5); // de sters
+      this.books.forEach((book) => {
+        if (book.cover) {
+          book.cover = 'data:image/jpeg;base64,' + book.cover;
+          console.log("Book with cover:", book);
+        }
+      });
       console.log("all books:", this.books)
 
     }, err => {
