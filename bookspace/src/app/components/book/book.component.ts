@@ -34,6 +34,9 @@ export class BookComponent {
       textt: ['']
       
     });
+
+    // this.initializeReadBooks();
+    // this.initializeTBRBooks();
   }
   coverImageUrl: any;
   isRead: boolean = false;
@@ -48,9 +51,49 @@ export class BookComponent {
   commDetails !: FormGroup;
   commDetailsEdit !: FormGroup;
 
+  books: Book[] = [];
+  movies_watch_list: Book[] = [];
+
   user: User = this.authenticationService.getUserFromLocalCache();
 
+  checkRead(): void {
+
+    let found: boolean = false;
+    // let movies: Movie[] = this.authenticationService.getUserFromLocalCache().movies;
+
+    for (let book of this.books) {
+      if (book.id == this.book.id) {
+        found = true;
+        this.isRead = true;
+        break;
+      }
+    }
+    if (found == false)
+      this.isRead = false;
+  }
+
+  checkTBR(): void {
+
+    let found: boolean = false;
+    // let movies: Movie[] = this.authenticationService.getUserFromLocalCache().movies;
+    // console.log('testt this.movies_watch_list', this.movies_watch_list);
+    console.log('#', this.movies_watch_list)
+    for (let book of this.movies_watch_list) {
+      console.log('###',book.id, this.book.id);
+      if (book.id == this.book.id) {
+        found = true;
+        console.log('')
+        this.isInTBR = true;
+        break;
+      }
+    }
+    if (found == false)
+      this.isInTBR = false;
+  }
+
   calculateClasses1() {
+   
+
     if (this.isRead === false)
       return 'btn btn-outline-success';
     else
@@ -81,11 +124,13 @@ export class BookComponent {
     }
     console.log('idBook', idBook);
     this.bookService.getBookById(idBook).subscribe(res => {
-      console.log('res', res);
+      // console.log('res', res);
       this.book = res;
       this.coverImageUrl = 'data:image/jpeg;base64,' + this.book.cover;
 
       this.initializeComments();
+      this.initializeReadBooks();
+      this.initializeTBRBooks();
 
     }, err => {
       console.log("Error while fetching data")
@@ -106,7 +151,7 @@ export class BookComponent {
           showConfirmButton: false,
           timer: 1500
         })
-
+        // this.movies_watch_list = res;
 
         // this.refreshUserFromLocalChash(this.authenticationService.getUserFromLocalCache().id);
         this.isInTBR = true;
@@ -348,4 +393,90 @@ updateComm() {
     this.router.navigate(['/login'])
   }
 
+  initializeReadBooks(){
+    // this.refreshUserFromLocalChash(this.authenticationService.getUserFromLocalCache().id);
+    // console.log("USER",this.authenticationService.getUserFromLocalCache())
+    const userId = this.authenticationService.getUserFromLocalCache().id;
+    this.bookService.getReadBooks(userId.toString()).subscribe(res => {
+
+      this.books = res;
+      // this.mostPopularMovies = this.mostPopularMovies.slice(0,5); // de sters
+      this.checkRead();
+      this.books.forEach((book) => {
+        if (book.cover) {
+          book.cover = 'data:image/jpeg;base64,' + book.cover;
+          console.log("Book with cover:", book);
+        }
+      });
+      console.log("books:", this.books)
+
+    }, err => {
+      console.log("Error while fetching data")
+    });
+
+    
+  
+
+    // this.bookService.getTBRBooks(userId.toString()).subscribe(res => {
+    //   console.log('test &&& TBR res', res)
+    //   this.movies_watch_list = res;
+    //   // this.mostPopularMovies = this.mostPopularMovies.slice(0,5); // de sters
+    //   // this.movies_watch_list.forEach((book) => {
+    //   //   if (book.cover) {
+    //   //     book.cover = 'data:image/jpeg;base64,' + book.cover;
+    //   //     console.log("Book with cover:", book);
+    //   //   }
+    //   // });
+    //   console.log("this.movies_watch_list *:", this.books)
+
+    // }, err => {
+    //   console.log("Error while fetching data")
+    // });
+
+
+    // this.movies_watch_list = this.authenticationService.getUserFromLocalCache().movies_watch_list;
+
+    // if(this.movies_watch_list)
+    // this.movies_watch_list =  this.movies_watch_list.filter(val => !(this.books.map(a => a.id)).includes(val.id));
+
+
+    // this.checkRead();
+    // this.checkTBR();
+
+  }
+
+  initializeTBRBooks(){
+    // this.refreshUserFromLocalChash(this.authenticationService.getUserFromLocalCache().id);
+    // console.log("USER",this.authenticationService.getUserFromLocalCache())
+    const userId = this.authenticationService.getUserFromLocalCache().id;
+  
+
+    this.bookService.getTBRBooks(userId.toString()).subscribe(res => {
+      console.log('test &&& TBR res', res)
+      this.movies_watch_list = res;
+      console.log("this.movies_watch_list *:", this.movies_watch_list)
+      this.checkTBR();
+      // this.mostPopularMovies = this.mostPopularMovies.slice(0,5); // de sters
+      // this.movies_watch_list.forEach((book) => {
+      //   if (book.cover) {
+      //     book.cover = 'data:image/jpeg;base64,' + book.cover;
+      //     console.log("Book with cover:", book);
+      //   }
+      // });
+      
+
+    }, err => {
+      console.log("Error while fetching data")
+    });
+
+
+    // this.movies_watch_list = this.authenticationService.getUserFromLocalCache().movies_watch_list;
+
+    if(this.movies_watch_list)
+    this.movies_watch_list =  this.movies_watch_list.filter(val => !(this.books.map(a => a.id)).includes(val.id));
+
+    
+    this.checkTBR();
+
+  }
 }
