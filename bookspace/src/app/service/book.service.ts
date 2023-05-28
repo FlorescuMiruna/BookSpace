@@ -15,6 +15,8 @@ export class BookService {
   addBookToTBRURL: string;
   removeBookFromTBRURL: string;
 
+
+
   constructor(private http: HttpClient) {
     this.getBooksURL = `${this.host}/book`;
     this.getBookByIdURL = `${this.host}/book`;
@@ -28,12 +30,12 @@ export class BookService {
   }
 
   getBookById(id: string): Observable<Book> {
-    console.log(this.getBookByIdURL + '/' + id)
+    console.log('getBookById URL:', this.getBookByIdURL + '/' + id)
     return this.http.get<Book>(this.getBookByIdURL + '/' + id);
   }
 
 
-  addBookToTBR(book: Book,userId: string): Observable<any> {
+  addBookToTBR(book: Book,userId: number): Observable<any> {
     var URL = "";
     URL = this.addBookToTBRURL + '/' + book.id + '/user/' + userId + '/toRead';
     console.log('URL', URL);

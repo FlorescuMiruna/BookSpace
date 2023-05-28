@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
 
     this.router.navigate(['/book'])
     localStorage.setItem('bookId', book.id.toString());
+    console.log("localStorage.getItem('bookId')",localStorage.getItem('bookId'));
     console.log('testt', localStorage.getItem('bookId'))
 
   }
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
 
       this.books = res;
       // this.mostPopularMovies = this.mostPopularMovies.slice(0,5); // de sters
-      console.log("most popular:", this.books)
+      console.log("all books:", this.books)
 
     }, err => {
       console.log("Error while fetching data")

@@ -26,19 +26,21 @@ export class CommentService {
 
   }
 
-  getAllCommentsByMovieId(bookId: string): Observable<Review[]> {
+  getAllCommentsByBookId(bookId: string): Observable<Review[]> {
 
-    var URL = this.getAllCommentsByBookIdURL + bookId; + '/reviews';
+    var URL = this.getAllCommentsByBookIdURL + bookId + '/reviews';
+    console.log('testt getAllCommentsByBookId URL', URL);
     return this.http.get<Review[]>(URL);
   }
 
-  addComment(comm : Review, movieId : string, userId: number ): Observable<Review> {
-    var URL = this.getAllCommentsByBookIdURL + movieId + '/user/' + userId;
+  addComment(comm : Review, bookId : string, userId: number ): Observable<Review> {
+    var URL = this.getAllCommentsByBookIdURL + bookId + '/user/' + userId + '/review';
     return this.http.post<Review>(URL,comm);
   }
 
-  deleteComment(comm: Review): Observable<Review> {
-    return this.http.delete<Review>(this.deleteCommentURL +comm.id);
+  deleteComment(comm: Review,bookId : string, userId: number): Observable<Review> {
+    var URL = this.getAllCommentsByBookIdURL + bookId + '/user/' + userId + '/review';
+    return this.http.delete<Review>(URL);
   }
 
 

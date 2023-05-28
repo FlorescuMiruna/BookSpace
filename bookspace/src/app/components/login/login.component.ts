@@ -42,12 +42,16 @@ export class LoginComponent implements OnInit, OnDestroy {
             console.log('response', response);
             this.showLoading = false;
        
-              Swal.fire({
-                icon: 'success',
-                title: `User ${response.username}.`,
-                showConfirmButton: false,
-                timer: 1500
-              })
+            this.authenticationService.addUserToLocalCache(response);
+            // const token = response.headers.get(HeaderType.JWT_TOKEN) as any;
+            // const decodedToken = jwt_decode(token);
+            this.router.navigateByUrl('/home');
+              // Swal.fire({
+              //   icon: 'success',
+              //   title: `User ${response.username}.`,
+              //   showConfirmButton: false,
+              //   timer: 1500
+              // })
             // this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.username}.`);
           },
           (errorResponse: HttpErrorResponse) => {
@@ -154,5 +158,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+}
+
+function jwt_decode(token: any) {
+  throw new Error('Function not implemented.');
 }
 

@@ -42,7 +42,8 @@
                 <!-- <img src="https://m.media-amazon.com/images/M/MV5BMzVlMmY2NTctODgwOC00NDMzLWEzMWYtM2RiYmIyNTNhMTI0XkEyXkFqcGdeQXVyNTAzNzgwNTg@._V1_Ratio0.6751_AL_.jpg" id="poster" class="img-responsive" alt=""> -->
                 <!-- </div> -->
                 <!-- <img src="assets/dune.png" id="poster" class="img-responsive" alt=""> -->
-                <img src={{book.cover}} id="poster" class="img-responsive" alt="">
+                <!-- <img src={{book.cover}} id="poster" class="img-responsive" alt=""> [src]="coverImageUrl" -->
+                <img [src]="coverImageUrl" alt="Book Cover" id="poster">
 
             </div>
 
@@ -58,7 +59,7 @@
                 <div class="box" id="plot-box">
                     {{book.description}}
                 </div>
-                <h2>FRANK HERBERT</h2>
+                <h2>{{book.author}}</h2>
                 <div class="box">
                     <ul class="list-unstyled">
                         <li><i class="fa fa-calendar"></i>{{book.date}}</li>
@@ -236,12 +237,12 @@
                 <div class="mb-3" id="write-review">
                     <label for="exampleInputText" class="form-label ">Write a review</label>
                     <!-- <input type="text" formControlName="text" class="form-control " id="text" aria-describedby="textHelp "> -->
-                    <textarea type="text" formControlName="text" class="form-control " id="text" aria-describedby="textHelp"></textarea>
+                    <textarea type="text" formControlName="review" class=" form-control " id="text " aria-describedby="textHelp "></textarea>
                 </div>
 
-                <div class="modal-footer">
+                <div class="modal-footer ">
 
-                    <button type="button" class="btn btn-dark" (click)="addComm() ">Publish review</button>
+                    <button type="button " class="btn btn-dark " (click)="addComm() ">Publish review</button>
                 </div>
             </form>
 
