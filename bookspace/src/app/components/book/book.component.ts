@@ -339,4 +339,8 @@ updateComm() {
 
   }
 
+  goToMyBooks(){
+    this.router.navigate(['/my-books'])
+  }
+
 }

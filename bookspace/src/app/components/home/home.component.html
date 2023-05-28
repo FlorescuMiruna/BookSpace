@@ -8,22 +8,22 @@
         <li class="btn"><span class="fas fa-bars"></span></li>
         <div class="items">
             <!-- <li><a href="/home">Home</a></li> -->
-            <li><a href="/movie">Descover Books</a></li>
+            <li><a href="/home">Descover Books</a></li>
             <div class="dropdown">
-                <li id="my-movies"><a>My Books</a></li>
+                <li id="my-movies" (click)="goToMyBooks()"><a>My Books</a></li>
 
-                <div class="dropdown-content">
+                <!-- <div class="dropdown-content">
 
                     <p class="dropdown-item">Read </p>
                     <p class="dropdown-item">To be read </p>
-                    <!-- <p class="dropdown-item">Favorites</p> -->
-                </div>
+
+                </div> -->
 
 
             </div>
 
-            <li><a>Profile</a></li>
-            <li><a>Users</a></li>
+            <!-- <li><a>Profile</a></li>
+            <li><a>Users</a></li> -->
 
         </div>
 

@@ -118,11 +118,13 @@ export class MyBooksComponent implements OnInit {
 
   }
 
-  goToMovie(movie: Book) {
+  goToBook(movie: Book) {
 
 
-    // this.router.navigate(['/movie-page'])
-    // localStorage.setItem("movieIdImdb", movie.id)
+
+    localStorage.setItem('bookId', movie.id.toString());
+    this.router.navigate(['/book'])
+  
 
 
   }
